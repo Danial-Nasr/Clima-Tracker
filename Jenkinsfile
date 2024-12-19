@@ -7,14 +7,7 @@ pipeline {
         DOCKER_CREDENTIALS = 'dany'  // Jenkins Docker Hub credentials ID
     }
     stages {
-        stage('Pull Code from Git') {
-            steps {
-                script {
-                    // Clone your Git repository using stored credentials
-                    git credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/Danial-Nasr/Clima-Tracker.git'
-                }
-            }
-        }
+       
 
         stage('Build Docker Image') {
             steps {
