@@ -1,39 +1,30 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'Danial-Nasr/web-weather'  // Replace with your Docker image name
-        
-        GIT_CREDENTIALS = 'dany'  // Jenkins Git credentials ID
-        DOCKER_CREDENTIALS = 'dany'  // Jenkins Docker Hub credentials ID
+        DOCKER_REGISTRY = 'Danial-Nasr'    // Docker Hub username
+        IMAGE_NAME = 'webweather'       // Docker image name
+        CONTAINER_NAME = 'weather-app'  // Docker container name
+        DOCKER_PORT = '5000'            // Application port
+        GIT_CREDENTIALS = 'dany'        // Git credentials ID
+        DOCKER_CREDENTIALS = 'dany'     // Docker Hub credentials ID
     }
     stages {
-       
+        stage('Pull Code from Git') {
+            steps {
+                script {
+                    // Clone Git repository using credentials
+                    git credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/Danial-Nasr/Clima-Tracker.git'
+                }
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image from the Dockerfile in the repository
-                    sh 'docker build -t $DOCKER_IMAGE .'
-                }
-            }
-        }
-
-        stage('Login to Docker Hub') {
-            steps {
-                script {
-                    // Log in to Docker Hub using stored credentials
-                    withCredentials([usernamePassword(credentialsId: "$DOCKER_CREDENTIALS", passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
-                    }
-                }
-            }
-        }
-
-        stage('Push Docker Image to Docker Hub') {
-            steps {
-                script {
-                    // Push the Docker image to Docker Hub
-                    sh 'docker push $DOCKER_IMAGE'
+                    // Build the Docker image from the repository
+                    sh """
+                        docker build --no-cache -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest .
+                    """
                 }
             }
         }
@@ -41,16 +32,50 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Run the container from the built Docker image
-                    sh 'docker run -d -p 5000:5000 $DOCKER_IMAGE'
+                    // Ensure any existing container is removed and run the new container
+                    sh """
+                        docker rm -f ${CONTAINER_NAME} || true
+                        docker run -d --name ${CONTAINER_NAME} -p ${DOCKER_PORT}:${DOCKER_PORT} ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
+                    """
+                }
+            }
+        }
+
+        stage('Test Container') {
+            steps {
+                script {
+                    // Verify the container is running
+                    sh """
+                        docker ps | grep ${CONTAINER_NAME}
+                    """
+                }
+            }
+        }
+
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                    // Log in to Docker Hub and push the Docker image
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh """
+                            echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USER} --password-stdin
+                            docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
+                        """
+                    }
                 }
             }
         }
     }
     post {
         always {
-            // Cleanup: Logout from Docker Hub
-            sh 'docker logout'
+            script {
+                // Cleanup resources: remove container and image, logout from Docker
+                sh """
+                    docker rm --force ${CONTAINER_NAME} || true
+                    docker rmi --force ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
+                    docker logout || true
+                """
+            }
         }
     }
 }
