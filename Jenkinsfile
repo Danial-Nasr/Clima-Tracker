@@ -5,15 +5,16 @@ pipeline {
         IMAGE_NAME = 'weather-app'         // Docker image name
         CONTAINER_NAME = 'weather-app'    // Docker container name
         DOCKER_PORT = '5000'              // Application port
-        GIT_CREDENTIALS = 'Danial-Nasr'  // Updated Git credentials ID
+        GIT_CREDENTIALS = 'Danial-Nasr'   // Updated Git credentials ID
         DOCKER_CREDENTIALS = 'Danial-Nasr' // Updated Docker Hub credentials ID
     }
     stages {
         stage('Pull Code from Git') {
             steps {
                 script {
-                    // Debugging Step: Verify Git Remote and Branches
-                    sh 'git ls-remote https://github.com/Danial-Nasr/Clima-Tracker.git'
+                    // Debugging Step: Check if Git is available and verify remote URL
+                    sh 'git --version' // Check Git version
+                    sh 'git ls-remote https://github.com/Danial-Nasr/Clima-Tracker.git' // Verify repository access
 
                     // Clone Git repository using credentials
                     git branch: 'main', credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/Danial-Nasr/Clima-Tracker.git'
