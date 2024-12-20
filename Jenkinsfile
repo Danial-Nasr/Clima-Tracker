@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = 'Danial-Nasr'    // Docker Hub username
         IMAGE_NAME = 'weather-app'         // Docker image name
-        CONTAINER_NAME = 'weather-app'     // Docker container name
+        CONTAINER_NAME = 'Danial-Nasr/weather-app:'     // Docker container name
         DOCKER_PORT = '5000'               // Application port
         GIT_CREDENTIALS = 'Danial-Nasr1'    // Updated Git credentials ID
         DOCKER_CREDENTIALS = 'Danial-Nasr1' // Updated Docker Hub credentials ID
