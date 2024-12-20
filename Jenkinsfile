@@ -11,16 +11,7 @@ pipeline {
     stages {
         stage('Pull Code from Git') {
             steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: "${GIT_CREDENTIALS}", usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASSWORD')]) {
-                        // Debugging Step: Check if Git is available and verify remote URL
-                        sh 'git --version' // Check Git version
-                        sh "git ls-remote https://$GIT_USER:$GIT_PASSWORD@github.com/Danial-Nasr/Clima-Tracker.git" // Verify repository access with credentials
-
-                        // Clone Git repository using credentials
-                        sh "git clone https://$GIT_USER:$GIT_PASSWORD@github.com/Danial-Nasr/Clima-Tracker.git"
-                    }
-                }
+                git branch: 'main', url: 'https://github.com/Danial-Nasr/Clima-Tracker.git', credentialsId: 'Danial-Nasr1'
             }
         }
 
