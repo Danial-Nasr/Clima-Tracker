@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_REGISTRY = 'Danial-Nasr'    // Docker Hub username
+        DOCKER_REGISTRY = 'danial773'    // Docker Hub username
         IMAGE_NAME = 'weather-app'         // Docker image name
         CONTAINER_NAME = 'weather-app-con'     // Docker container name
         DOCKER_PORT = '5000'               // Application port
@@ -51,10 +51,11 @@ pipeline {
 
         stage('Push Docker Image to Docker Hub') {
             steps {
-               withCredentials([usernamePassword(credentialsId: 'dockerhub_cread', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
-                    sh 'docker push ${DOCKER_IMAGE}:latest'
-                    sh 'docker logout'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_cread', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD'),
+                             string(credentialsId: 'docker_image', variable: 'DOCKER_IMAGE')]) { // Add the secret credential here
+                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+                sh 'docker push ${DOCKER_IMAGE}:latest'
+                sh 'docker logout'
  
                 }
             }
