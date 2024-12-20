@@ -1,19 +1,19 @@
 pipeline {
     agent any
     environment {
-        DOCKER_REGISTRY = 'danial773'    // Docker Hub username
-        IMAGE_NAME = 'weather-app'         // Docker image name
-        CONTAINER_NAME = 'weather-app-con'     // Docker container name
-        DOCKER_PORT = '5000'               // Application port
-        GIT_CREDENTIALS = 'Danial-Nasr1'    // Updated Git credentials ID
-        DOCKER_CREDENTIALS = 'Danial-Nasr1' // Updated Docker Hub credentials ID
-        DOCKER_USERNAME = 'danial773'  // Replace with your Docker username
-        DOCKER_PASSWORD = 'dckr_pat_olvu_DAEYGnhU2sLho-T6pOYjcc'  // Replace with your Docker password
+        DOCKER_REGISTRY = 'danial773'         // Docker Hub username
+        IMAGE_NAME = 'weather-app'            // Docker image name
+        CONTAINER_NAME = 'weather-app-con'    // Docker container name
+        DOCKER_PORT = '5000'                  // Application port
+        GIT_CREDENTIALS = 'Danial-Nasr1'      // Git credentials ID
+        DOCKER_CREDENTIALS = 'Danial-Nasr1'   // Docker Hub credentials ID
+        DOCKER_USERNAME = 'danial773'         // Docker Hub username
+        DOCKER_PASSWORD = 'dckr_pat_olvu_DAEYGnhU2sLho-T6pOYjcc' // Docker password
     }
     stages {
         stage('Pull Code from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/Danial-Nasr/Clima-Tracker.git', credentialsId: 'Danial-Nasr1'
+                git branch: 'main', url: 'https://github.com/Danial-Nasr/Clima-Tracker.git', credentialsId: "${GIT_CREDENTIALS}"
             }
         }
 
@@ -52,20 +52,18 @@ pipeline {
         }
 
         stage('Push Docker Image to Docker Hub') {
-          steps {
-            // Log in to Docker Hub
-            sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
-            
-            // Tag the Docker image with your username (if it's not already tagged)
-            sh 'docker tag ${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
-            
-            // Push the image to Docker Hub
-            sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
-            
-            // Log out from Docker Hub
-            sh 'docker logout'
- 
-                }
+            steps {
+                // Log in to Docker Hub
+                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+
+                // Tag the Docker image with your username (if it's not already tagged)
+                sh 'docker tag ${DOCKER_REGISTRY}/${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
+
+                // Push the image to Docker Hub
+                sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
+
+                // Log out from Docker Hub
+                sh 'docker logout'
             }
         }
     }
