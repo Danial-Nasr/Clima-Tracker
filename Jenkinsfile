@@ -5,8 +5,8 @@ pipeline {
         IMAGE_NAME = 'webweather'       // Docker image name
         CONTAINER_NAME = 'weather-app'  // Docker container name
         DOCKER_PORT = '5000'            // Application port
-        GIT_CREDENTIALS = 'dany'        // Git credentials ID
-        DOCKER_CREDENTIALS = 'dany'     // Docker Hub credentials ID
+        GIT_CREDENTIALS = 'Danial-Nasr'        // Git credentials ID
+        DOCKER_CREDENTIALS = 'Danial-Nasr'     // Docker Hub credentials ID
     }
     stages {
         stage('Pull Code from Git') {
