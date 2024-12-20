@@ -7,6 +7,8 @@ pipeline {
         DOCKER_PORT = '5000'               // Application port
         GIT_CREDENTIALS = 'Danial-Nasr1'    // Updated Git credentials ID
         DOCKER_CREDENTIALS = 'Danial-Nasr1' // Updated Docker Hub credentials ID
+        DOCKER_USERNAME = 'danial773'  // Replace with your Docker username
+        DOCKER_PASSWORD = 'dckr_pat_olvu_DAEYGnhU2sLho-T6pOYjcc'  // Replace with your Docker password
     }
     stages {
         stage('Pull Code from Git') {
@@ -50,12 +52,18 @@ pipeline {
         }
 
         stage('Push Docker Image to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub_cread', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD'),
-                             string(credentialsId: 'docker_image', variable: 'DOCKER_IMAGE')]) { // Add the secret credential here
-                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
-                sh 'docker push ${DOCKER_IMAGE}'  
-                sh 'docker logout'
+          steps {
+            // Log in to Docker Hub
+            sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+            
+            // Tag the Docker image with your username (if it's not already tagged)
+            sh 'docker tag ${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
+            
+            // Push the image to Docker Hub
+            sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
+            
+            // Log out from Docker Hub
+            sh 'docker logout'
  
                 }
             }
