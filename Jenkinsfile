@@ -2,18 +2,21 @@ pipeline {
     agent any
     environment {
         DOCKER_REGISTRY = 'Danial-Nasr'    // Docker Hub username
-        IMAGE_NAME = 'webweather'       // Docker image name
-        CONTAINER_NAME = 'weather-app'  // Docker container name
-        DOCKER_PORT = '5000'            // Application port
-        GIT_CREDENTIALS = 'Danial-Nasr'        // Git credentials ID
-        DOCKER_CREDENTIALS = 'Danial-Nasr'     // Docker Hub credentials ID
+        IMAGE_NAME = 'weather-app'         // Docker image name
+        CONTAINER_NAME = 'weather-app'    // Docker container name
+        DOCKER_PORT = '5000'              // Application port
+        GIT_CREDENTIALS = 'Danial-Nasr'  // Updated Git credentials ID
+        DOCKER_CREDENTIALS = 'Danial-Nasr' // Updated Docker Hub credentials ID
     }
     stages {
         stage('Pull Code from Git') {
             steps {
                 script {
+                    // Debugging Step: Verify Git Remote and Branches
+                    sh 'git ls-remote https://github.com/Danial-Nasr/Clima-Tracker.git'
+
                     // Clone Git repository using credentials
-                    git credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/Danial-Nasr/Clima-Tracker.git'
+                    git branch: 'main', credentialsId: "${GIT_CREDENTIALS}", url: 'https://github.com/Danial-Nasr/Clima-Tracker.git'
                 }
             }
         }
