@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = 'Danial-Nasr'    // Docker Hub username
         IMAGE_NAME = 'weather-app'         // Docker image name
-        CONTAINER_NAME = 'weather-app'     // Docker container name
+        CONTAINER_NAME = 'weather-app-con'     // Docker container name
         DOCKER_PORT = '5000'               // Application port
         GIT_CREDENTIALS = 'Danial-Nasr1'    // Updated Git credentials ID
         DOCKER_CREDENTIALS = 'Danial-Nasr1' // Updated Docker Hub credentials ID
@@ -20,7 +20,7 @@ pipeline {
                 script {
                     // Build the Docker image from the repository
                     sh """
-                        docker build --no-cache -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest .
+                        docker build --no-cache -t ${DOCKER_REGISTRY}/${IMAGE_NAME} .
                     """
                 }
             }
@@ -31,8 +31,8 @@ pipeline {
                 script {
                     // Ensure any existing container is removed and run the new container
                     sh """
-                        # docker rm -f ${CONTAINER_NAME} || true
-                        docker run -d --name ${CONTAINER_NAME} -p ${DOCKER_PORT}:${DOCKER_PORT} ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest
+                        docker rm -f ${CONTAINER_NAME} || true
+                        docker run -d --name ${CONTAINER_NAME} -p ${DOCKER_PORT}:${DOCKER_PORT} ${DOCKER_REGISTRY}/${IMAGE_NAME}
                     """
                 }
             }
