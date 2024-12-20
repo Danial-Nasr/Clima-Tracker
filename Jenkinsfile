@@ -54,7 +54,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_cread', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD'),
                              string(credentialsId: 'docker_image', variable: 'DOCKER_IMAGE')]) { // Add the secret credential here
                 sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
-                sh 'docker push ${DOCKER_IMAGE}:latest'
+                sh 'docker push ${DOCKER_IMAGE}'  
                 sh 'docker logout'
  
                 }
