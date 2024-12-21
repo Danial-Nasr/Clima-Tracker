@@ -68,19 +68,18 @@ pipeline {
         }
 
         // Ansible Playbook Stage
-        stage('Run Ansible Playbook') {
-            steps {
-                dir('keys') {
-                         sh 'chmod 600 keys/private_key1'
-                         sh 'chmod 600 keys/private_key2'
+            stage('Run Ansible Playbook') {
+                steps {
+                    dir('keys') {
+                        sh 'chmod 600 keys/private_key1'
+                        sh 'chmod 600 keys/private_key2'
                     }
-                
+                    
                     // Run the Ansible playbook
-                 /sh 'ansible-playbook -i inventory.ini playbook.yml'
+                    sh 'ansible-playbook -i inventory.ini playbook.yml'
                 }
             }
-        }
-    }
+        
     post {
         always {
             script {
