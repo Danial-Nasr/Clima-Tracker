@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+       stage('Build Docker Image') {
             steps {
                 script {
                     // Build the Docker image from the repository
@@ -67,18 +67,19 @@ pipeline {
             }
         }
 
-        stage('Run Ansible Playbook') {
-            steps {
-                dir('keys') {
-                    sh 'chmod 600 keys/private_key1'
-                    sh 'chmod 600 keys/private_key2'
+        // Ansible Playbook Stage
+            stage('Run Ansible Playbook') {
+                steps {
+                    dir('keys') {
+                        sh 'chmod 600 keys/private_key1'
+                        sh 'chmod 600 keys/private_key2'
+                    }
+                    
+                    // Run the Ansible playbook
+                    sh 'ansible-playbook -i inventory.ini playbook.yml'
                 }
-
-                // Run the Ansible playbook
-                sh 'ansible-playbook -i inventory.ini playbook.yml'
             }
-        }
-    }
+        
     post {
         always {
             script {
