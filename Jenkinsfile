@@ -72,11 +72,11 @@ pipeline {
             steps {
                 script {
                     // Ensure correct permissions for private keys
-                    sh 'chmod 600 Clima-Tracker/keys/private_key1'
-                    sh 'chmod 600 Clima-Tracker/keys/private_key2'
+                    sh 'chmod 600 keys/private_key1'
+                    sh 'chmod 600 keys/private_key2'
 
                     // Run the Ansible playbook
-                    sh 'ansible-playbook -i Clima-Tracker/inventory.ini Clima-Tracker/playbook.yml'
+                    sh 'ansible-playbook -i inventory.ini playbook.yml'
                 }
             }
         }
