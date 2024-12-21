@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        /*stage('Build Docker Image') {
+       stage('Build Docker Image') {
             steps {
                 script {
                     // Build the Docker image from the repository
@@ -65,7 +65,7 @@ pipeline {
                 // Log out from Docker Hub
                 sh 'docker logout'
             }
-        }*/
+        }
 
         // Ansible Playbook Stage
         stage('Run Ansible Playbook') {
