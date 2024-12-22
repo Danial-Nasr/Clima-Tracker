@@ -70,24 +70,37 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 3. Ansible installed on the host machine.
 
 ### Steps
+# Project Workflow: From Code to Deployment 
+- The CI/CD pipeline is operational but requires further improvements for optimization and efficiency.  
+   **jenkins Setup with Plugins**  
+- Install required Jenkins plugins for GitHub and Docker.  
+- Configure Jenkins credentials for Docker Hub.  
 
-1. Clone the repository:
-   ```bash
-   git clone <your-private-repo-url>
-   ```
-2. Set up two virtual machines using the following `Vagrantfile`:
-  ![Vagrant](Vagrant-configuration)
-3. Run the Vagrant machines:
-   ```bash
-   vagrant up
-   ```
-4. Create an inventory file for Ansible to manage the Vagrant machines:
-   ```ini
-   [vagrant]
-   192.168.45.15 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/ubuntu_machine_1/virtualbox/private_key
-   192.168.45.18 ansible_ssh_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/ubuntu_machine_2/virtualbox/private_key
-   ```
-5. Write and run an Ansible playbook to deploy the application on both machines.
+**Jenkins Pipeline**  
+- Verify repository existence; clone if absent.  
+- Retrieve updates using `git fetch`.  
+- Ensure local commits match remote; pull changes if necessary.  
+- Build and push Docker images to Docker Hub.  
+- Set up GitHub webhook for Jenkins integration using ngrok.  
+
+**SSH Key Creation**  
+- Generate SSH keys for the Vagrant machines.  
+
+**Log File Configuration**  
+- Update log file settings to resolve issues.  
+
+**Ansible Inventory **
+- Create an inventory file to manage Vagrant machine configurations.  
+
+** Ansible Playbook ** 
+- Develop an Ansible playbook to automate deployment tasks.  
+
+ **Ansible in Jenkins ** 
+- Integrate Ansible steps into Jenkins and update the Jenkinsfile accordingly.  
+
+
+
+
 
 ## Usage
 
@@ -102,8 +115,8 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 
 For any questions or support, contact:
 
-- Email: [support@example.com](mailto:support@example.com)
-- GitHub Issues: [Project Issues](https://github.com/your-private-repo/issues)
+- Email: [support@example.com](danialnasrgerges@gmail.com)
+- GitHub Issues: [Project Issues](https://github.com/your-private-repo/issues
 
 ## Roadmap
 
