@@ -32,7 +32,7 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 
 ![The Output of these steps should be the success of the pipeline](images/image3.png)
 ![The Weather app should be working on the two vagrant machines](images/image1.jpg)
-![]((images/image2.jpg))
+![Result]((images/image2.jpg))
 ### Application Running on Virtual Machines
 - Screenshots of the application deployed on two Vagrant machines.
 
