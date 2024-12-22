@@ -1,14 +1,19 @@
 ---
-- name: Install Docker, pull image, and run container
-  hosts: all
+- name: Update, install Docker, and deploy containers
+  hosts: vagrant
   become: yes
+  vars:
+    docker_image_name: "baselabouelnour/devops-odc-final-project:latest"  # Replace with your Docker Hub image
+    container_name: "the-weather-app"                  # Customize the container name
 
   tasks:
-    - name: Update apt packages
+    # Step 1: Update the system and install Docker
+    - name: Update the system
       apt:
         update_cache: yes
+        upgrade: dist
 
-    - name: Install dependencies for Docker
+    - name: Install required packages for Docker
       apt:
         name:
           - apt-transport-https
@@ -18,7 +23,9 @@
         state: present
 
     - name: Add Docker GPG key
-      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
     - name: Add Docker repository
       apt_repository:
@@ -31,43 +38,22 @@
         state: present
 
     - name: Start and enable Docker service
-      service:
+      systemd:
         name: docker
         state: started
-        enabled: true
+        enabled: yes
 
-    - name: Debug current working directory
-      command: pwd
-      register: pwd_output
-
-    - name: Display working directory
-      debug:
-        var: pwd_output.stdout
-
-    - name: List files in the Dockerfile directory
-      command: ls -la ./app
-      register: ls_output
-
-    - name: Display file list
-      debug:
-        var: ls_output.stdout
-
-    - name: Pull Docker image
+    # Step 2: Pull and run the Docker image
+    - name: Pull Docker image from Docker Hub
       docker_image:
-        name: my-flask-app
-        source: build
-        build:
-          path: ./app  # المسار إلى Dockerfile
-          dockerfile: Dockerfile
+        name: "{{ docker_image_name }}"
+        source: pull
 
     - name: Run Docker container
       docker_container:
-        name: flask_app_container
-        image: my-flask-app
+        name: "{{ container_name }}"
+        image: "{{ docker_image_name }}"
         state: started
+        restart_policy: always
         ports:
-          - "5000:5000"
-        env:
-          FLASK_APP: app.py
-        command: >
-          flask run --host=0.0.0.0
+          - "5000:5000"  # Map port 8080 on host to port 80 in the container (adjust as needed)
