@@ -76,7 +76,7 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 - Install required Jenkins plugins for GitHub and Docker.  
 - Configure Jenkins credentials for Docker Hub.  
 
-**Jenkins Pipeline**  
+**Jenkins Pipeline** 
 - Verify repository existence; clone if absent.  
 - Retrieve updates using `git fetch`.  
 - Ensure local commits match remote; pull changes if necessary.  
