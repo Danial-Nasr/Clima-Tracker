@@ -41,8 +41,26 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 - Screenshots of the application deployed on two Vagrant machines.
 
 ## Installation
-
 ![prerequisites](prerequisites_docker_jenkins_ansible.sh)
+
+
+- **Purpose**: Automates installation of Docker, Jenkins, and Ansible on Ubuntu.
+- **Steps**:
+  - Updates system packages.
+  - Installs required dependencies.
+  - Adds official repositories for Docker, Jenkins, and Ansible.
+  - Installs Docker, Jenkins, and Ansible.
+  - Adds the user to the `docker` group.
+  - Tests if Docker, Jenkins, and Ansible are working.
+- **Usage**:  
+  Run the script with your username:  
+  ```bash
+  ./install_prerequisites.sh <your-username>
+  ```
+- **Requirements**:  
+  - Ubuntu 20.04+  
+  - User with `sudo` privileges  
+- **Note**: Log out and back in after installing Docker to apply group changes.
 
 ### Prerequisites
 
