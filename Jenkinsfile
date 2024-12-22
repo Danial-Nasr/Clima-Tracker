@@ -17,10 +17,9 @@ pipeline {
             }
         }
 
-       stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image from the repository
                     sh """
                         docker build --no-cache -t ${DOCKER_REGISTRY}/${IMAGE_NAME} .
                     """
@@ -31,7 +30,6 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Ensure any existing container is removed and run the new container
                     sh """
                         docker rm -f ${CONTAINER_NAME} || true
                         docker run -d --name ${CONTAINER_NAME} -p ${DOCKER_PORT}:${DOCKER_PORT} ${DOCKER_REGISTRY}/${IMAGE_NAME}
@@ -43,7 +41,6 @@ pipeline {
         stage('Test Container') {
             steps {
                 script {
-                    // Verify the container is running
                     sh """
                         docker ps | grep ${CONTAINER_NAME}
                     """
@@ -53,37 +50,27 @@ pipeline {
 
         stage('Push Docker Image to Docker Hub') {
             steps {
-                // Log in to Docker Hub
-                sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
-
-                // Tag the Docker image with your username (if it's not already tagged)
-                sh 'docker tag ${DOCKER_REGISTRY}/${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
-
-                // Push the image to Docker Hub
-                sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
-
-                // Log out from Docker Hub
-                sh 'docker logout'
+                script {
+                    sh 'echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin'
+                    sh 'docker tag ${DOCKER_REGISTRY}/${IMAGE_NAME} ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
+                    sh 'docker push ${DOCKER_USERNAME}/${IMAGE_NAME}:latest'
+                    sh 'docker logout'
+                }
             }
         }
 
-        // Ansible Playbook Stage
-            stage('Run Ansible Playbook') {
-                steps {
-                    dir('keys') {
-                        sh 'chmod 600 keys/private_key1'
-                        sh 'chmod 600 keys/private_key2'
-                    }
-                    
-                    // Run the Ansible playbook
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    sh 'chmod 600 keys/private_key1 keys/private_key2'
                     sh 'ansible-playbook -i inventory.ini playbook.yml'
                 }
             }
-        
+        }
+    }
     post {
         always {
             script {
-                // Cleanup resources: remove container and image, logout from Docker
                 sh """
                     docker rm --force ${CONTAINER_NAME} || true
                     docker rmi --force ${DOCKER_REGISTRY}/${IMAGE_NAME}:latest || true
