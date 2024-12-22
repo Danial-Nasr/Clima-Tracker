@@ -10,9 +10,19 @@ This project demonstrates the creation of a fully automated deployment pipeline 
 
 ### Features
 
-- Integration with a private GitHub repository.
-- Use of lightweight virtual machines with Vagrant.
-- Execution of an Ansible playbook to manage application deployment.
+-Integration with a private GitHub repository.
+
+-Use of lightweight virtual machines with Vagrant.
+
+-Execution of an Ansible playbook to manage application deployment.
+
+-Integration with Jenkins for continuous integration and deployment.
+
+-Integration with a private GitHub repository.
+
+-Use of lightweight virtual machines with Vagrant.
+
+-Execution of an Ansible playbook to manage application deployment.
 
 ### Differentiators
 
