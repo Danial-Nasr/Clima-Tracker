@@ -6,7 +6,7 @@ Automated DevOps Pipeline using Vagrant and Ansible
 
 ## Description
 
-This project demonstrates the creation of a fully automated deployment pipeline using tools such as GitHub, Vagrant, and Ansible. The pipeline is designed to deploy a Python application on two virtual machines with Ansible. The goal is to streamline the deployment process and ensure consistency across different environments.
+This project demonstrates the creation of a fully automated deployment pipeline using GitHub, Vagrant, and Ansible. The pipeline automates the deployment of a Python application onto two virtual machines, managing the entire lifecycle from code push to application deployment. The goal is to streamline the deployment process, enhance environment consistency, and provide a reusable pipeline for continuous integration and deployment (CI/CD).
 
 ### Features
 
@@ -26,16 +26,41 @@ This project demonstrates the creation of a fully automated deployment pipeline 
 
 ### Differentiators
 
-Compared to other automation pipelines, this project focuses on simplicity by using Vagrant and Ansible, making it ideal for small projects and learning environments.
+This project stands out by offering a simple yet powerful approach to DevOps automation using Jenkins, Ansible, and vagrant. It's optimized for smaller applications or learning environments, providing a clean and minimalistic solution that ensures smooth, reliable, and automated deployments with fewer resources.
 
 ## Visuals
 
+-The Output of these steps should be the success of the pipeline
+
+![The Output of these steps should be the success of the pipeline](images/image3.png)
+-The Weather app should be working on the two vagrant machines
+![The Weather app should be working on the two vagrant machines](images/image1.jpg)
+-Result
+![Result](images/image2.jpg)
 ### Application Running on Virtual Machines
 - Screenshots of the application deployed on two Vagrant machines.
 
 ## Installation
-
 ![prerequisites](prerequisites_docker_jenkins_ansible.sh)
+
+
+- **Purpose**: Automates installation of Docker, Jenkins, and Ansible on Ubuntu.
+- **Steps**:
+  - Updates system packages.
+  - Installs required dependencies.
+  - Adds official repositories for Docker, Jenkins, and Ansible.
+  - Installs Docker, Jenkins, and Ansible.
+  - Adds the user to the `docker` group.
+  - Tests if Docker, Jenkins, and Ansible are working.
+- **Usage**:  
+  Run the script with your username:  
+  ```bash
+  ./install_prerequisites.sh <your-username>
+  ```
+- **Requirements**:  
+  - Ubuntu 20.04+  
+  - User with `sudo` privileges  
+- **Note**: Log out and back in after installing Docker to apply group changes.
 
 ### Prerequisites
 
