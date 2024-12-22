@@ -44,8 +44,8 @@
       debug:
         var: pwd_output.stdout
 
-    - name: List files in the current directory
-      command: ls -la
+    - name: List files in the Dockerfile directory
+      command: ls -la ./app
       register: ls_output
 
     - name: Display file list
@@ -57,7 +57,7 @@
         name: my-flask-app
         source: build
         build:
-          path: ./app  # Update this path to where the Dockerfile resides
+          path: ./app  # المسار إلى Dockerfile
           dockerfile: Dockerfile
 
     - name: Run Docker container
