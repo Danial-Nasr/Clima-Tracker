@@ -38,13 +38,20 @@
 
     - name: Pull Docker image
       docker_image:
-        name: nginx
+        name: python
+        tag: "3.9-slim"
         source: pull
 
     - name: Run Docker container
       docker_container:
-        name: nginx_container
-        image: nginx
+        name: python_container
+        image: python:3.9-slim
         state: started
         ports:
-          - "80:80"
+          - "5000:5000"
+        env:
+          FLASK_APP: app.py
+        command: >
+          flask run --host=0.0.0.0
+        volumes:
+          - ./app:/app
