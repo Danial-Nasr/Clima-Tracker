@@ -40,29 +40,7 @@ Compared to other automation pipelines, this project focuses on simplicity by us
    git clone <your-private-repo-url>
    ```
 2. Set up two virtual machines using the following `Vagrantfile`:
-   ```ruby
-   Vagrant.configure("2") do |config| 
-     # Define the first ubuntu machine
-     config.vm.define "ubuntu_machine_1" do |machine|
-       machine.vm.box = "ubuntu/jammy64"
-       machine.vm.network "private_network", ip: "192.168.45.15"
-       machine.vm.provider "virtualbox" do |vb|
-         vb.memory = "512"
-         vb.cpus = "1"
-       end
-     end
-
-     # Define the second ubuntu machine
-     config.vm.define "ubuntu_machine_2" do |machine|
-       machine.vm.box = "ubuntu/jammy64"
-       machine.vm.network "private_network", ip: "192.168.45.18"
-       machine.vm.provider "virtualbox" do |vb|
-         vb.memory = "512"
-         vb.cpus = "1"
-       end
-     end
-   end
-   ```
+  ![Vagrant](Vagrant-configuration)
 3. Run the Vagrant machines:
    ```bash
    vagrant up
