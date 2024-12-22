@@ -1,6 +1,6 @@
 ---
 - name: Install Docker, pull image, and run container
-  hosts: vagrant
+  hosts: all
   become: yes
 
   tasks:
@@ -38,14 +38,16 @@
 
     - name: Pull Docker image
       docker_image:
-        name: python
-        tag: "3.9-slim"
-        source: pull
+        name: my-flask-app
+        source: build
+        build:
+          path: .
+          dockerfile: Dockerfile
 
     - name: Run Docker container
       docker_container:
-        name: python_container
-        image: python:3.9-slim
+        name: flask_app_container
+        image: my-flask-app
         state: started
         ports:
           - "5000:5000"
@@ -53,5 +55,17 @@
           FLASK_APP: app.py
         command: >
           flask run --host=0.0.0.0
-        volumes:
-          - ./app:/app
+
+    - name: Verify container is running
+      shell: docker ps | grep flask_app_container
+      register: container_status
+      failed_when: "'flask_app_container' not in container_status.stdout"
+
+    - name: Check application logs
+      shell: docker logs flask_app_container
+      register: container_logs
+      ignore_errors: yes
+
+    - name: Display application logs
+      debug:
+        var: container_logs.stdout
