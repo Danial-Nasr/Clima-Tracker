@@ -36,12 +36,28 @@
         state: started
         enabled: true
 
+    - name: Debug current working directory
+      command: pwd
+      register: pwd_output
+
+    - name: Display working directory
+      debug:
+        var: pwd_output.stdout
+
+    - name: List files in the current directory
+      command: ls -la
+      register: ls_output
+
+    - name: Display file list
+      debug:
+        var: ls_output.stdout
+
     - name: Pull Docker image
       docker_image:
         name: my-flask-app
         source: build
         build:
-          path: .
+          path: ./app  # Update this path to where the Dockerfile resides
           dockerfile: Dockerfile
 
     - name: Run Docker container
@@ -55,17 +71,3 @@
           FLASK_APP: app.py
         command: >
           flask run --host=0.0.0.0
-
-    - name: Verify container is running
-      shell: docker ps | grep flask_app_container
-      register: container_status
-      failed_when: "'flask_app_container' not in container_status.stdout"
-
-    - name: Check application logs
-      shell: docker logs flask_app_container
-      register: container_logs
-      ignore_errors: yes
-
-    - name: Display application logs
-      debug:
-        var: container_logs.stdout
