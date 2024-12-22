@@ -69,8 +69,8 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 2. Vagrant installed on the host machine.
 3. Ansible installed on the host machine.
 
-### Steps
-# Project Workflow: From Code to Deployment 
+ # Steps
+### Project Workflow: From Code to Deployment 
 - The CI/CD pipeline is operational but requires further improvements for optimization and efficiency.  
    **jenkins Setup with Plugins**  
 - Install required Jenkins plugins for GitHub and Docker.  
@@ -89,13 +89,13 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 **Log File Configuration**  
 - Update log file settings to resolve issues.  
 
-**Ansible Inventory **
+ **Ansible Inventory**
 - Create an inventory file to manage Vagrant machine configurations.  
 
-** Ansible Playbook ** 
+**Ansible Playbook** 
 - Develop an Ansible playbook to automate deployment tasks.  
 
- **Ansible in Jenkins ** 
+ **Ansible in Jenkins** 
 - Integrate Ansible steps into Jenkins and update the Jenkinsfile accordingly.  
 
 
