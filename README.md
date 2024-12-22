@@ -7,6 +7,7 @@ Automated DevOps Pipeline using Vagrant and Ansible
 ## Description
 
 This project demonstrates the creation of a fully automated deployment pipeline using GitHub, Vagrant, and Ansible. The pipeline automates the deployment of a Python application onto two virtual machines, managing the entire lifecycle from code push to application deployment. The goal is to streamline the deployment process, enhance environment consistency, and provide a reusable pipeline for continuous integration and deployment (CI/CD).
+![Description](images/image4.jpg)
 
 ### Features
 
