@@ -116,7 +116,7 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 For any questions or support, contact:
 
 - Email: [support@example.com](danialnasrgerges@gmail.com)
-- GitHub Issues: [Project Issues](https://github.com/your-private-repo/issues
+- GitHub Issues: [Project Issues](https://github.com/your-private-repo/issues)
 
 ## Roadmap
 
