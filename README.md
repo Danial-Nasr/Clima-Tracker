@@ -111,18 +111,14 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 
 - Access the application at `http://192.168.45.15:5000` or `http://192.168.45.18:5000` after deployment.
 
-## Support
 
-For any questions or support, contact:
-
-- Email: [support@example.com](danialnasrgerges@gmail.com)
-- GitHub Issues: [Project Issues](https://github.com/your-private-repo/issues)
 
 ## Roadmap
 
-- Add monitoring using Prometheus and Grafana.
-- Integrate automated testing into the deployment process.
-- Expand deployment to include Kubernetes.
+- Implement monitoring and alerting using Prometheus and Grafana.
+-Add automated testing to the CI/CD pipeline.
+-Transition to Kubernetes for broader deployment capabilities.
+-Improve pipeline efficiency and reduce manual configurations.
 
 ## Contributing
 
@@ -132,14 +128,7 @@ Contributions are welcome! To contribute:
 2. Create a new feature branch.
 3. Submit a pull request with a clear description.
 
-## Authors and Acknowledgments
-
-- **Your Name** - Project Lead
-- **Orange Digital Center** - Training Provider
-- Special thanks to all contributors and mentors.
-
-
 ## Project Status
 
-The project is functional but needs improvements, such as enhanced monitoring and automated tests. Contributions are encouraged!
+The project is fully functional, achieving automated deployment of a Python application using Jenkins, Vagrant, and Ansible. It integrates CI/CD practices with GitHub and deploys the application on virtual machines. While successful, improvements are needed in monitoring, testing, scalability, and optimization. Future enhancements include adding Prometheus and Grafana for monitoring, integrating automated testing, and expanding deployment capabilities with Kubernetes. The project is open to contributions to refine its features and achieve these goals.
 
