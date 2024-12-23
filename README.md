@@ -29,9 +29,9 @@ This project demonstrates the creation of a fully automated deployment pipeline 
 
 This project stands out by offering a simple yet powerful approach to DevOps automation using Jenkins, Ansible, and vagrant. It's optimized for smaller applications or learning environments, providing a clean and minimalistic solution that ensures smooth, reliable, and automated deployments with fewer resources.
 
-## Visuals
+# Visuals
 
--The Output of these steps should be the success of the pipeline
+### The Output of these steps should be the success of the pipeline
 
 ![The Output of these steps should be the success of the pipeline](images/image3.png)
 -The Weather app should be working on the two vagrant machines
@@ -115,10 +115,10 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 
 ## Roadmap
 
-- Implement monitoring and alerting using Prometheus and Grafana.
--Add automated testing to the CI/CD pipeline.
--Transition to Kubernetes for broader deployment capabilities.
--Improve pipeline efficiency and reduce manual configurations.
+- Implement monitoring and alerting using Prometheus and Grafana.  
+- Add automated testing to the CI/CD pipeline.  
+- Transition to Kubernetes for broader deployment capabilities.  
+- Improve pipeline efficiency and reduce manual configurations.  
 
 ## Contributing
 
