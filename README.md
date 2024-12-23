@@ -41,7 +41,8 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 ### Application Running on Virtual Machines
 - Screenshots of the application deployed on two Vagrant machines.
 
-## Installation
+# Installation  
+###   prerequisites_docker_jenkins_ansible.sh
 ![prerequisites](prerequisites_docker_jenkins_ansible.sh)
 
 
@@ -72,7 +73,7 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
  # Steps
 ### Project Workflow: From Code to Deployment 
 - The CI/CD pipeline is operational but requires further improvements for optimization and efficiency.  
-   **jenkins Setup with Plugins**  
+   **Jenkins Setup with Plugins**  
 - Install required Jenkins plugins for GitHub and Docker.  
 - Configure Jenkins credentials for Docker Hub.  
 
@@ -130,5 +131,5 @@ Contributions are welcome! To contribute:
 
 ## Project Status
 
-The project is fully functional, achieving automated deployment of a Python application using Jenkins, Vagrant, and Ansible. It integrates CI/CD practices with GitHub and deploys the application on virtual machines. While successful, improvements are needed in monitoring, testing, scalability, and optimization. Future enhancements include adding Prometheus and Grafana for monitoring, integrating automated testing, and expanding deployment capabilities with Kubernetes. The project is open to contributions to refine its features and achieve these goals.
+The project is fully functional, achieving automated deployment of a Python application using Jenkins, Vagrant, and Ansible. It integrates CI/CD practices with GitHub and deploys the application on virtual machines. While successful, monitoring, testing, scalability, and optimization improvements are needed. Future enhancements include adding Prometheus and Grafana for monitoring, integrating automated testing, and expanding deployment capabilities with Kubernetes. The project is open to contributions to refine its features and achieve these goals.
 
