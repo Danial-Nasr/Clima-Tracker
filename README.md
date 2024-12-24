@@ -43,7 +43,7 @@ This project stands out by offering a simple yet powerful approach to DevOps aut
 
 # Installation  
 ###   prerequisites_docker_jenkins_ansible.sh
-![prerequisites](prerequisites_docker_jenkins_ansible.sh)
+[prerequisites](prerequisites_docker_jenkins_ansible.sh)
 
 
 - **Purpose**: Automates installation of Docker, Jenkins, and Ansible on Ubuntu.
