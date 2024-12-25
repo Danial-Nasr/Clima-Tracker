@@ -6,9 +6,8 @@ pipeline {
         CONTAINER_NAME = 'weather-app-con'    // Docker container name
         DOCKER_PORT = '5000'                  // Application port
         GIT_CREDENTIALS = 'Danial-Nasr1'      // Git credentials ID
-        DOCKER_CREDENTIALS = 'Danial-Nasr1'   // Docker Hub credentials ID
-        DOCKER_USERNAME = 'danial773'         // Docker Hub username
-        DOCKER_PASSWORD = 'dckr_pat_olvu_DAEYGnhU2sLho-T6pOYjcc' // Docker password
+        DOCKER_CREDENTIALS = 'Danial-Nasr5'   // Docker Hub credentials ID
+        
     }
     stages {
         stage('Pull Code from Git') {
